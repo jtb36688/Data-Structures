@@ -3,7 +3,7 @@ class Queue:
     self.size = 0
     # what data structure should we
     # use to store queue elements?
-    self.storage = 
+    self.storage = 0
 
   def enqueue(self, item):
     pass
