@@ -1,18 +1,24 @@
 class Queue:
   def __init__(self):
     self.size = 0
-    # what data structure should we
-    # use to store queue elements?
     self.storage = LinkedList()
-    
+
   def enqueue(self, item):
     self.storage.add_to_head(item)
   
   def dequeue(self):
-    self.storage.add_to_tail()
+    self.storage.remove_tail()
 
   def len(self):
-    pass
+    if not self.storage.head:
+      return 0
+    else:
+      current = self.storage.head
+      count = 1
+        while current.get_next():
+          count += 1
+          current.get_next()
+
 
 class Node:
     def __init__(self, value=None, next_node=None):
@@ -41,7 +47,6 @@ class LinkedList:
             self.tail = new_node
         # we have a non-empty list, add the new node to the tail
         else:
-            # set the current tail's next reference to our new node
             self.tail.set_next(new_node)
             self.tail = new_node
 
@@ -67,8 +72,25 @@ class LinkedList:
         # otherwise we have more than one element in our list
         else:
             value = self.head.get_value()
-            self.head = self.head.get_next() # ty chelsea :)
-            return value # chelsea's got my back, so does Elvis :-)
+            self.head = self.head.get_next()
+            return value
+
+    def remove_tail(self):
+      if not self.tail:
+          return None
+
+      if not self.head.get_next():
+            head = self.head
+            self.head = None
+            self.tail = None
+            return head.get_value()
+      
+      else:
+        value = self.tail.get_value()
+        self.tail = self.tail.get_prev()
+        return value
+
+
 
     def contains(self, value):
         # If linked list is empty, return False
