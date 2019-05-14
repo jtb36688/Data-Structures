@@ -7,7 +7,7 @@ class Queue:
     self.storage.add_to_head(item)
   
   def dequeue(self):
-    self.storage.remove_tail()
+    return self.storage.remove_tail()
 
   def len(self):
     if not self.storage.head:
@@ -87,12 +87,12 @@ class LinkedList:
             return head.get_value()
       
       else:
-        value = self.tail.get_value()
+        value = self.tail.value
         check = self.head
-        while check.get_next():
-          print("check moving right")
+        while not check.get_next() == self.tail:
           check = check.get_next()
         self.tail = check
+        self.tail.set_next(None)
         return value
 
 
@@ -125,7 +125,6 @@ class LinkedList:
         elif not self.head.get_next():
             new_node.set_next(self.head)
             self.head = new_node
-            print(self.head.get_next())
             
         # If it has 2 or more items
         else:
