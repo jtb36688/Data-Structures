@@ -15,9 +15,11 @@ class Queue:
     else:
       current = self.storage.head
       count = 1
-        while current.get_next():
-          count += 1
-          current.get_next()
+      print(current.get_next())
+      while current.get_next():
+        count += 1
+        current = current.get_next()
+      return count
 
 
 class Node:
@@ -118,8 +120,9 @@ class LinkedList:
     
         # If it has one item
         elif not self.head.get_next():
-            new_node.set_next = self.head
+            new_node.set_next(self.head)
             self.head = new_node
+            print(self.head.get_next())
             
         # If it has 2 or more items
         else:
