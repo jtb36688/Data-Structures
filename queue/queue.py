@@ -15,7 +15,6 @@ class Queue:
     else:
       current = self.storage.head
       count = 1
-      print(current.get_next())
       while current.get_next():
         count += 1
         current = current.get_next()
@@ -89,7 +88,11 @@ class LinkedList:
       
       else:
         value = self.tail.get_value()
-        self.tail = self.tail.get_prev()
+        check = self.head
+        while check.get_next():
+          print("check moving right")
+          check = check.get_next()
+        self.tail = check
         return value
 
 
