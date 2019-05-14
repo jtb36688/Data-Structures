@@ -1,10 +1,10 @@
 """Each ListNode holds a reference to its previous node
 as well as its next node in the List."""
 class ListNode:
-  def __init__(self, value, prev=None, next=None):
+  def __init__(self, value, prev_node=None, next_node=None):
     self.value = value
-    self.prev = prev
-    self.next = next
+    self.prev_node = prev_node
+    self.next_node = next_node
 
   """Wrap the given value in a ListNode and insert it
   after this node. Note that this node could already
@@ -44,10 +44,14 @@ class DoublyLinkedList:
     return self.length
 
   def add_to_head(self, value):
-    pass
+    newhead = ListNode(value, None, self.head)
+    self.head.prev_node = newhead
+    self.head = newhead
 
   def remove_from_head(self):
-    pass
+    newhead = self.head.next
+    self.head.delete()
+    self.head = newhead
 
   def add_to_tail(self, value):
     pass
@@ -66,3 +70,4 @@ class DoublyLinkedList:
     
   def get_max(self):
     pass
+
