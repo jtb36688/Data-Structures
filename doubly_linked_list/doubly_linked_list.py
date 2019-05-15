@@ -116,17 +116,19 @@ class DoublyLinkedList:
 
 
   def delete(self, node):
-    found = False
-    while not found:
-      print("deleting")
-      check = self.head
-      if check == node:
-        found = True
+    if node == self.head:
+      if self.head.next:
+        print("deleting head", node.value)
+        self.head = self.head.next
       else:
-        if check == self.tail:
-          return
-        check = check.next
-    check.delete()
+       self.head = None
+    if node == self.tail:
+      if self.tail.prev:
+        self.tail = self.tail.prev
+      else:
+       self.tail = None
+    self.length -= 1
+    node.delete()
     
   def get_max(self):
     check = self.head
