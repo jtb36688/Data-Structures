@@ -129,5 +129,11 @@ class DoublyLinkedList:
     check.delete()
     
   def get_max(self):
-    pass
+    check = self.head
+    maxnode = self.head
+    while check.next:
+      if check.next.value > check.value:
+        maxnode = check.next
+      check = check.next
+    return maxnode.value
 
