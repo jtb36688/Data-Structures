@@ -69,9 +69,9 @@ class DoublyLinkedList:
     newtail = ListNode(value, self.tail, None)
     if self.tail:
       self.tail.next = newtail
-    self.tail = newtail
-    if not self.head:
+    else:
       self.head = newtail
+    self.tail = newtail
     self.length += 1
 
   def remove_from_tail(self):
@@ -79,7 +79,6 @@ class DoublyLinkedList:
     if not self.head.next:
       self.head = None
     newtail = self.tail.prev
-    print("newtail", newtail)
     self.tail.delete()
     self.tail = newtail
     self.length -= 1
@@ -91,34 +90,29 @@ class DoublyLinkedList:
   def move_to_front(self, node):
     if node is self.head:
       return
+    if node is self.tail:
+      self.tail = self.tail.prev
     self.length -= 1
-    # line 94 is required because the node delete method doesn't decrease length
     node.delete()
+    if not self.head.next:
+      self.tail = self.head
     self.add_to_head(node.value)
 
   def move_to_end(self, node):
-    found = False
-    while not found:
-      print("movetoend")
-      check = self.head
-      if check == node:
-        found = True
-      else:
-        if check == self.tail:
-          return
-        check = check.next
-    if check == self.tail:
+    if node is self.tail:
       return
-    check.delete()
-    self.tail.next = check
-    check.prev = self.tail
-    check = self.tail
+    if node is self.head:
+      self.head = self.head.next
+    self.length -= 1
+    node.delete()
+    if not self.tail.prev:
+      self.head = self.tail
+    self.add_to_tail(node.value)
 
 
   def delete(self, node):
     if node == self.head:
       if self.head.next:
-        print("deleting head", node.value)
         self.head = self.head.next
       else:
        self.head = None
