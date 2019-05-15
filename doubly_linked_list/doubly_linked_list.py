@@ -90,13 +90,54 @@ class DoublyLinkedList:
       return None
 
   def move_to_front(self, node):
-    pass
+    found = False
+    while not found:
+      print("movetofront")
+      check = self.head
+      if check == node:
+        found = True
+      else:
+        if check == self.tail:
+          return
+        check = check.next
+    if check == self.head:
+      return
+    check.delete()
+    self.head.prev = check
+    check.next = self.head
+    check = self.head
 
   def move_to_end(self, node):
-    pass
+    found = False
+    while not found:
+      print("movetoend")
+      check = self.head
+      if check == node:
+        found = True
+      else:
+        if check == self.tail:
+          return
+        check = check.next
+    if check == self.tail:
+      return
+    check.delete()
+    self.tail.next = check
+    check.prev = self.tail
+    check = self.tail
+
 
   def delete(self, node):
-    pass
+    found = False
+    while not found:
+      print("deleting")
+      check = self.head
+      if check == node:
+        found = True
+      else:
+        if check == self.tail:
+          return
+        check = check.next
+    check.delete()
     
   def get_max(self):
     pass
