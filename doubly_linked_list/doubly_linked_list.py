@@ -57,7 +57,6 @@ class DoublyLinkedList:
     newhead = self.head.next
     if not self.head.next:
       self.tail = None
-    print("newhead", newhead)
     self.head.delete()
     self.head = newhead
     self.length -= 1
@@ -90,22 +89,12 @@ class DoublyLinkedList:
       return None
 
   def move_to_front(self, node):
-    found = False
-    while not found:
-      print("movetofront")
-      check = self.head
-      if check == node:
-        found = True
-      else:
-        if check == self.tail:
-          return
-        check = check.next
-    if check == self.head:
+    if node is self.head:
       return
-    check.delete()
-    self.head.prev = check
-    check.next = self.head
-    check = self.head
+    self.length -= 1
+    # line 94 is required because the node delete method doesn't decrease length
+    node.delete()
+    self.add_to_head(node.value)
 
   def move_to_end(self, node):
     found = False
