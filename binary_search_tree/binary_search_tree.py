@@ -30,14 +30,14 @@ class BinarySearchTree:
       else:
         return False
 
-  def get_max(self):
+  def get_max(self, maxvalue=None):
     if not maxvalue:
       maxvalue = self.value
     else:
       if self.value > maxvalue:
         maxvalue = self.value
     if self.right:
-      self.right.get_max()
+      return self.right.get_max(maxvalue)
     else:
       return maxvalue
 
