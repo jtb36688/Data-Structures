@@ -5,14 +5,27 @@ class Heap:
 
   def insert(self, value):
     if not len(self.storage):
-      self.storage.append(value)
-    found = False
-    while not found:
-      currentitem = self.storage.index[0]
+      return self.storage.append(value)
+    inserted = False
+    currentitem = self.storage.index[0]
+    while not inserted:
+      currentindex = self.storage.index(currentitem)
+      leftchild = self.storage[2 * currentindex + 1]
+      leftindex = 2 * currentindex + 1
+      rightchild = self.storage[2 * currentindex + 2]
+      rightindex = 2 * currentindex + 2
       if not self.comparator(value, currentitem):
-        if self.storage[2 * self.storage.index(currentitem) + 1]:
-          if not self.storage[2 * self.storage.index(currentitem) + 2]:
-      else:
+        if leftchild:
+          if not rightchild:
+            if value >= leftchild:
+              inserted = True
+              self.storage.insert(leftindex, value)
+          else:
+        else:
+          inserted = True
+          self.storage.insert(rightindex, value)
+        
+
 
           
         
