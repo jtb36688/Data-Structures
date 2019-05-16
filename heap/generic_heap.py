@@ -1,10 +1,19 @@
 class Heap:
-  def __init__(self, comparator):
+  def __init__(self, comparator=None):
     self.storage = []
     self.comparator = comparator
 
   def insert(self, value):
-    pass
+    if not len(self.storage):
+      self.storage.append(value)
+    if not self.comparator:
+      for item in self.storage:
+        if value >= item:
+          return self.storage.insert(self.storage.index(item), value)
+        else:
+          if self.storage.index(item) == len(self.storage)-1:
+            self.storage.append(value)
+        
 
   def delete(self):
     pass
