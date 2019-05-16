@@ -5,7 +5,7 @@ class Heap:
   def insert(self, value):
 # append the last value, then bubble up
     self.storage.append(value)
-    self.bubble_up(-1)
+    self.bubble_up(len(self.storage)-1)
 
   def delete(self):
     pass
@@ -19,12 +19,16 @@ class Heap:
 
   def bubble_up(self, index):
   # checking parent of index
-    parentindex = index-1 // 2
+    parentindex = (index-1) // 2
+    print(self.storage[index], self.storage[parentindex])
     if self.storage[index] > self.storage[parentindex]:
+      print("bubbling up", self.storage[index])
       temp = self.storage[index]
       self.storage[index] = self.storage[parentindex]
       self.storage[parentindex] = temp
-      self.bubble_up(parentindex)
+      print(self.storage)
+      if not parentindex == 0:
+        self.bubble_up(parentindex)
 
     
 
