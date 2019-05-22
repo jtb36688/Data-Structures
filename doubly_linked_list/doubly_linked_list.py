@@ -44,25 +44,92 @@ class DoublyLinkedList:
     return self.length
 
   def add_to_head(self, value):
-    pass
+    newhead = ListNode(value, None, self.head)
+    if self.head:
+      self.head.prev = newhead
+    else:
+      self.tail = newhead
+    self.head = newhead
+    self.length += 1
 
   def remove_from_head(self):
-    pass
+    oldhead = self.head
+    newhead = self.head.next
+    if not self.head.next:
+      self.tail = None
+    self.head.delete()
+    self.head = newhead
+    self.length -= 1
+    if oldhead.value:
+      return oldhead.value
+    else:
+      return None
 
   def add_to_tail(self, value):
-    pass
+    newtail = ListNode(value, self.tail, None)
+    if self.tail:
+      self.tail.next = newtail
+    else:
+      self.head = newtail
+    self.tail = newtail
+    self.length += 1
 
   def remove_from_tail(self):
-    pass
+    oldtail = self.tail
+    if not self.head.next:
+      self.head = None
+    newtail = self.tail.prev
+    self.tail.delete()
+    self.tail = newtail
+    self.length -= 1
+    if oldtail.value:
+      return oldtail.value
+    else:
+      return None
 
   def move_to_front(self, node):
-    pass
+    if node is self.head:
+      return
+    if node is self.tail:
+      self.tail = self.tail.prev
+    self.length -= 1
+    node.delete()
+    if not self.head.next:
+      self.tail = self.head
+    self.add_to_head(node.value)
 
   def move_to_end(self, node):
-    pass
+    if node is self.tail:
+      return
+    if node is self.head:
+      self.head = self.head.next
+    self.length -= 1
+    node.delete()
+    if not self.tail.prev:
+      self.head = self.tail
+    self.add_to_tail(node.value)
+
 
   def delete(self, node):
-    pass
+    if node == self.head:
+      if self.head.next:
+        self.head = self.head.next
+      else:
+       self.head = None
+    if node == self.tail:
+      if self.tail.prev:
+        self.tail = self.tail.prev
+      else:
+       self.tail = None
+    self.length -= 1
+    node.delete()
     
   def get_max(self):
-    pass
+    check = self.head
+    maxnode = self.head
+    while check.next:
+      if check.next.value > check.value:
+        maxnode = check.next
+      check = check.next
+    return maxnode.value
+
